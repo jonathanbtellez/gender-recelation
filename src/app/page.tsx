@@ -23,8 +23,9 @@ export default function Home() {
   return (
     <Box
     sx={{
-      width: '100%',
+      width: '80%',
       height: '100dvh',
+      margin: 'auto',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -34,7 +35,7 @@ export default function Home() {
         container
         spacing={2}
         sx={{
-          width: '70vh',
+          width: '100%',
           height: '400px',
           backgroundColor: 'rgba(255, 255, 255, 0.4)',
           backdropFilter: 'blur(10px)',
