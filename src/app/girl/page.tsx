@@ -53,7 +53,9 @@ export default function Girl() {
             )}
         </Grid>
 
-        <Grid size={12} justifyItems={'center'} >
+        <Grid size={12} display="flex"
+          alignItems="center"
+          justifyContent="center" >
           <motion.div
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 2 }}
