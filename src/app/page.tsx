@@ -1,95 +1,75 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client"
+
+import { getGender } from "@/service/gender-service";
+import { Box, Grid, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const router = useRouter();
+  const [gender, setGender] = useState(null);
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  useEffect(() => {
+    const getGenderResponse = async () => {
+      const { gender } = await getGender();
+      setGender(gender.gender);
+    }
+    getGenderResponse();
+  }, [])
+
+
+
+  return (
+    <Box
+      sx={{
+        width: '100vw',
+        height: '100vh'
+      }}
+      display={'grid'}
+      alignItems={'center'}
+      justifyContent={'center'}
+    >
+      <Grid
+        container
+        spacing={2}
+        sx={{
+          width: '80vw',
+          backgroundColor: 'rgba(255, 255, 255, 0.4)',
+          backdropFilter: 'blur(10px)',
+          WebkitBackdropFilter: 'blur(10px)',
+          border: '1px solid rgba(255, 255, 255, 0.18)',
+          borderRadius: '16px',
+          boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
+          overflow: 'hidden',
+          padding: 2,
+        }}
+      >
+        <Grid size={{
+          xs: 12,
+          md: 6
+        }} >
+          <Typography color="white" fontWeight={700} fontSize={20}>
+            Hola familia, es hora de revelar el secreto...
+          </Typography>
+        </Grid>
+        <Grid size={{
+          xs: 12,
+          md: 6
+        }} alignItems={'center'} justifyItems={'center'}>
+          {gender && <CountdownCircleTimer
+            isPlaying
+            duration={15}
+            colors={['#98D9F5', '#FFCEDE','#98D9F5', '#FFCEDE']}
+            colorsTime={[15, 10, 5, 0]}
+            onComplete={()=> {
+              router.push( `/${gender}`);
+            }}
           >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+            {({ remainingTime }) => remainingTime}
+          </CountdownCircleTimer>}
+        </Grid>
+      </Grid>
+    </Box>
+  )
 }
