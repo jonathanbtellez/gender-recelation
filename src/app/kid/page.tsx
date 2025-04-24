@@ -2,12 +2,22 @@
 import { Fade, Grid, Typography } from "@mui/material";
 import * as motion from "motion/react-client"
 import { useEffect, useState } from "react";
+import confetti from 'canvas-confetti';
 
 export default function Kid() {
   const [isTextVisible, setIsTextVisible] = useState(false);
+  const dispatchConfeti = () => {
+    confetti({
+      particleCount: 150,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+  };
 
   useEffect(() => {
+    dispatchConfeti()
     setTimeout(() => {
+      dispatchConfeti()
       setIsTextVisible(true);
     }, 6000)
   }, [])

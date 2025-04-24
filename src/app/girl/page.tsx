@@ -1,13 +1,24 @@
 'use client'
 import { Fade, Grid, Typography } from "@mui/material";
+import confetti from "canvas-confetti";
 import * as motion from "motion/react-client"
 import { useEffect, useState } from "react";
 
 export default function Girl() {
   const [isTextVisible, setIsTextVisible] = useState(false);
 
+  const dispatchConfeti = () => {
+    confetti({
+      particleCount: 150,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+  };
+
   useEffect(() => {
+    dispatchConfeti()
     setTimeout(() => {
+      dispatchConfeti()
       setIsTextVisible(true);
     }, 6000)
   }, [])

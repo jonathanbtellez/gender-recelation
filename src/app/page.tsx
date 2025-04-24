@@ -23,8 +23,8 @@ export default function Home() {
   return (
     <Box
       sx={{
-        width: '100vw',
-        height: '100vh'
+        width: '100%',
+        height: '100dvh'
       }}
       display={'grid'}
       alignItems={'center'}
@@ -54,16 +54,20 @@ export default function Home() {
           </Typography>
         </Grid>
         <Grid size={{
-          xs: 12,
+          xs:12,
           md: 6
-        }} alignItems={'center'} justifyItems={'center'}>
+        }}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
           {gender && <CountdownCircleTimer
             isPlaying
             duration={15}
-            colors={['#98D9F5', '#FFCEDE','#98D9F5', '#FFCEDE']}
+            colors={['#98D9F5', '#FFCEDE', '#98D9F5', '#FFCEDE']}
             colorsTime={[15, 10, 5, 0]}
-            onComplete={()=> {
-              router.push( `/${gender}`);
+            onComplete={() => {
+              router.push(`/${gender}`);
             }}
           >
             {({ remainingTime }) => remainingTime}
