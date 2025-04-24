@@ -22,19 +22,20 @@ export default function Home() {
 
   return (
     <Box
-      sx={{
-        width: '100%',
-        height: '100dvh'
-      }}
-      display={'grid'}
-      alignItems={'center'}
-      justifyContent={'center'}
+    sx={{
+      width: '100%',
+      height: '100dvh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}
     >
       <Grid
         container
         spacing={2}
         sx={{
-          width: '80vw',
+          width: '70vh',
+          height: '400px',
           backgroundColor: 'rgba(255, 255, 255, 0.4)',
           backdropFilter: 'blur(10px)',
           WebkitBackdropFilter: 'blur(10px)',
@@ -45,27 +46,21 @@ export default function Home() {
           padding: 2,
         }}
       >
-        <Grid size={{
-          xs: 12,
-          md: 6
-        }} >
-          <Typography color="white" fontWeight={700} fontSize={20}>
+        <Grid size={12} >
+          <Typography color="white" fontWeight={700} fontSize={20} textAlign={'center'}>
             Hola familia, es hora de revelar el secreto...
           </Typography>
         </Grid>
-        <Grid size={{
-          xs:12,
-          md: 6
-        }}
+        <Grid size={12}
           display="flex"
           alignItems="center"
           justifyContent="center"
         >
           {gender && <CountdownCircleTimer
             isPlaying
-            duration={15}
+            duration={9}
             colors={['#98D9F5', '#FFCEDE', '#98D9F5', '#FFCEDE']}
-            colorsTime={[15, 10, 5, 0]}
+            colorsTime={[9, 6, 3, 0]}
             onComplete={() => {
               router.push(`/${gender}`);
             }}
